@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Grahan: What Science Actually Says | Eclipse Beliefs & Evidence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0c10;
+    --bg2: #111318;
+    --bg3: #181b22;
+    --gold: #c8a84b;
+    --gold-light: #e4c97a;
+    --gold-dim: #7a6330;
+    --white: #f0ede6;
+    --grey: #9a9590;
+    --blue: #4a9cc8;
+    --blue-dim: #1e3f52;
+    --green: #4caf7a;
+    --green-dim: #1a3d2b;
+    --red: #e05555;
+    --red-dim: #3d1a1a;
+    --amber: #e0a832;
+    --amber-dim: #3d2e10;
+    --border: #2a2d35;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --display: 'Playfair Display', Georgia, serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(11,12,16,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 32px;
+    display: flex; align-items: center; gap: 24px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--grey);
+  }
+  nav .logo { color: var(--gold); font-weight: 600; font-size: 13px; margin-right: auto; }
+  nav a { color: var(--grey); text-decoration: none; transition: color 0.2s; }
+  nav a:hover { color: var(--gold); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 82vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 max(32px, 8vw) 72px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 30%, rgba(200,168,75,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 30% at 50% 28%, rgba(200,168,75,0.22) 0%, transparent 50%),
+      radial-gradient(circle 3px at 50% 28%, #fff 0%, transparent 100%),
+      linear-gradient(180deg, #020305 0%, #0b0c10 100%);
+  }
+  .eclipse-ring {
+    position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: #000;
+    box-shadow:
+      0 0 0 2px rgba(200,168,75,0.3),
+      0 0 40px 18px rgba(200,168,75,0.18),
+      0 0 100px 60px rgba(200,168,75,0.07),
+      inset 0 0 60px rgba(200,168,75,0.05);
+    animation: coronaPulse 6s ease-in-out infinite;
+  }
+  @keyframes coronaPulse {
+    0%,100% { box-shadow: 0 0 0 2px rgba(200,168,75,0.3), 0 0 40px 18px rgba(200,168,75,0.18), 0 0 100px 60px rgba(200,168,75,0.07); }
+    50% { box-shadow: 0 0 0 2px rgba(200,168,75,0.5), 0 0 60px 30px rgba(200,168,75,0.28), 0 0 130px 80px rgba(200,168,75,0.11); }
+  }
+  .hero-label {
+    position: relative;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold-dim);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    position: relative;
+    font-family: var(--display);
+    font-size: clamp(44px, 8vw, 96px);
+    line-height: 1.0;
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .hero h1 em { color: var(--gold); font-style: italic; }
+  .hero-sub {
+    position: relative;
+    font-size: 18px; font-weight: 300; color: var(--grey);
+    max-width: 600px; line-height: 1.6; margin-bottom: 36px;
+  }
+  .hero-tags {
+    position: relative;
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .tag {
+    padding: 5px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--grey);
+  }
+  .tag.gold { border-color: var(--gold-dim); color: var(--gold); }
+
+  /* ─── LAYOUT ─── */
+  .container { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+  .container-wide { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+
+  section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700; line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  h2 .label {
+    display: block;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 10px; font-weight: 400;
+  }
+  h3 {
+    font-family: var(--display);
+    font-size: 22px; font-weight: 700;
+    color: var(--white); margin-bottom: 12px; margin-top: 36px;
+  }
+  p { margin-bottom: 18px; color: rgba(240,237,230,0.88); font-weight: 300; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--white); font-weight: 600; }
+
+  /* ─── INTRO STATEMENT ─── */
+  .intro-statement {
+    background: var(--bg2);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 28px 32px;
+    margin: 40px 0;
+  }
+  .intro-statement p {
+    font-size: 19px; font-style: italic;
+    color: var(--white); font-weight: 300;
+    margin: 0; line-height: 1.7;
+  }
+
+  /* ─── ENV CHANGES GRID ─── */
+  .env-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px; margin-top: 40px;
+  }
+  .env-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color 0.3s, transform 0.3s;
+    animation: fadeUp 0.5s ease both;
+  }
+  .env-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+  .env-card-icon {
+    font-size: 24px; margin-bottom: 12px;
+  }
+  .env-card-title {
+    font-family: var(--mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--gold); margin-bottom: 8px;
+  }
+  .env-card p {
+    font-size: 14px; line-height: 1.6; margin: 0; color: var(--grey);
+  }
+  .env-card p strong { color: var(--white); }
+  .env-card .source-link {
+    display: inline-block; margin-top: 10px;
+    font-family: var(--mono); font-size: 10px;
+    color: var(--blue); text-decoration: none;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .env-card .source-link:hover { border-color: var(--blue); }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    display: flex; align-items: center; gap: 16px;
+    margin: 56px 0 48px;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--border); }
+  .divider-text {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim);
+  }
+
+  /* ─── PRACTICE CARDS ─── */
+  .practice {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .practice-header {
+    display: flex; align-items: flex-start;
+    gap: 20px; padding: 28px 28px 0;
+  }
+  .practice-num {
+    font-family: var(--display);
+    font-size: 52px; font-weight: 900; line-height: 1;
+    color: var(--border); flex-shrink: 0;
+    width: 56px; text-align: right;
+  }
+  .practice-meta { flex: 1; }
+  .practice-action {
+    font-family: var(--display);
+    font-size: 24px; font-weight: 700;
+    color: var(--white); margin-bottom: 6px;
+  }
+  .practice-origin {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .origin-shruti { color: #6ab5a0; }
+  .origin-smriti { color: var(--amber); }
+  .origin-folk { color: var(--red); }
+  .practice-body { padding: 20px 28px 28px 28px; }
+  .practice-body p { font-size: 15px; }
+
+  .verdict-bar {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--bg3);
+    border-top: 1px solid var(--border);
+    padding: 16px 28px;
+  }
+  .verdict-label {
+    font-family: var(--mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--grey); flex-shrink: 0;
+  }
+  .verdict-pill {
+    padding: 4px 14px; border-radius: 20px;
+    font-family: var(--mono); font-size: 10px;
+    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .verdict-strong { background: var(--green-dim); color: var(--green); }
+  .verdict-partial { background: var(--amber-dim); color: var(--amber); }
+  .verdict-weak { background: rgba(150,150,150,0.1); color: var(--grey); }
+  .verdict-none { background: var(--red-dim); color: var(--red); }
+  .verdict-confirmed { background: var(--blue-dim); color: var(--blue); }
+
+  /* ─── SCIENCE BLOCK ─── */
+  .science-block {
+    background: rgba(74,156,200,0.05);
+    border: 1px solid rgba(74,156,200,0.15);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 16px 0;
+  }
+  .science-label {
+    font-family: var(--mono); font-size: 9px;
+    text-transform: uppercase; letter-spacing: 0.2em;
+    color: var(--blue); margin-bottom: 10px;
+  }
+  .science-block p { font-size: 14px; color: rgba(240,237,230,0.8); margin: 0; }
+
+  /* ─── CITATION ─── */
+  cite {
+    font-style: normal;
+    font-family: var(--mono); font-size: 11px;
+    color: var(--blue); cursor: pointer;
+  }
+  .source-ref {
+    display: inline-block;
+    font-family: var(--mono); font-size: 10px;
+    color: var(--blue); text-decoration: none;
+    border-bottom: 1px dotted var(--blue-dim);
+    transition: border-color 0.2s;
+  }
+  .source-ref:hover { border-color: var(--blue); }
+
+  /* ─── HIGHLIGHT BOX ─── */
+  .highlight {
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 20px 0;
+  }
+  .highlight.gold { background: rgba(200,168,75,0.06); border-left: 3px solid var(--gold); }
+  .highlight.red { background: var(--red-dim); border-left: 3px solid var(--red); }
+  .highlight.green { background: var(--green-dim); border-left: 3px solid var(--green); }
+  .highlight p { font-size: 14px; margin: 0; }
+  .highlight-title {
+    font-family: var(--mono); font-size: 9px;
+    text-transform: uppercase; letter-spacing: 0.2em;
+    margin-bottom: 8px;
+  }
+  .highlight.gold .highlight-title { color: var(--gold); }
+  .highlight.red .highlight-title { color: var(--red); }
+  .highlight.green .highlight-title { color: var(--green); }
+
+  /* ─── TEXTUAL AUTHORITY BADGE ─── */
+  .auth-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .auth-shruti { background: rgba(106,181,160,0.12); color: #6ab5a0; border: 1px solid rgba(106,181,160,0.25); }
+  .auth-smriti { background: rgba(224,168,50,0.1); color: var(--amber); border: 1px solid rgba(224,168,50,0.2); }
+  .auth-folk { background: rgba(224,85,85,0.1); color: var(--red); border: 1px solid rgba(224,85,85,0.2); }
+
+  /* ─── FAQ ─── */
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+  }
+  .faq-q {
+    width: 100%; text-align: left;
+    background: none; border: none; cursor: pointer;
+    padding: 24px 0;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 20px;
+    font-family: var(--display);
+    font-size: 18px; font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+    transition: color 0.2s;
+  }
+  .faq-q:hover { color: var(--gold); }
+  .faq-arrow {
+    flex-shrink: 0; width: 24px; height: 24px;
+    border: 1px solid var(--border); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; transition: transform 0.3s, background 0.3s;
+    color: var(--gold); margin-top: 2px;
+  }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); background: rgba(200,168,75,0.1); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+  }
+  .faq-item.open .faq-a { max-height: 600px; padding-bottom: 24px; }
+  .faq-a p { font-size: 15px; color: rgba(240,237,230,0.8); }
+
+  /* ─── FOOTER NOTE ─── */
+  .final-note {
+    background: linear-gradient(135deg, rgba(200,168,75,0.05), rgba(74,156,200,0.03));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    margin-top: 48px;
+  }
+  .final-note h3 { margin-top: 0; color: var(--gold); }
+  .final-note p { font-size: 15px; }
+
+  /* ─── TABLE (textual authority) ─── */
+  .auth-table { width: 100%; border-collapse: collapse; margin-top: 32px; font-size: 14px; }
+  .auth-table th {
+    background: var(--bg3);
+    padding: 12px 16px; text-align: left;
+    font-family: var(--mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--gold); border-bottom: 1px solid var(--border);
+  }
+  .auth-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: rgba(240,237,230,0.85); vertical-align: top; }
+  .auth-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* ─── ANIM ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { animation: fadeUp 0.6s ease both; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    nav a { display: none; }
+    .practice-header { flex-direction: column; gap: 8px; }
+    .practice-num { font-size: 36px; width: auto; }
+    .hero { padding-bottom: 48px; }
+    .env-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">ग्रहण · Grahan</span>
+  <a href="#environment">Environment</a>
+  <a href="#practices">Practices</a>
+  <a href="#texts">Texts</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="eclipse-ring"></div>
+  <p class="hero-label">Science × Tradition × Evidence</p>
+  <h1>What <em>Actually</em><br>Happens During<br>a Grahan</h1>
+  <p class="hero-sub">A peer-reviewed look at Indian eclipse beliefs — what the science confirms, what it disproves, and what was added 4,000 years after the original observation.</p>
+  <div class="hero-tags">
+    <span class="tag gold">Rigveda · 4000+ BCE</span>
+    <span class="tag">Atmospheric Physics</span>
+    <span class="tag">Microbiology</span>
+    <span class="tag">Chronobiology</span>
+    <span class="tag">Peer-Reviewed Evidence</span>
+  </div>
+</div>
+
+<!-- ─── INTRO ─── -->
+<section id="intro">
+  <div class="container">
+    <div class="intro-statement">
+      <p>"Science says nothing unusual happens during an eclipse." This claim is <strong>factually incorrect</strong>. The atmosphere, ionosphere, ozone layer, microbial populations, and circadian biology all measurably change during a solar eclipse. The question is not whether things happen — it is whether specific Indian practices address what actually happens. Some do. Some don't. Here is the evidence.</p>
+    </div>
+    <p>This post has three audiences: those who dismiss eclipse beliefs as superstition, those who follow them without knowing why, and those who want to know what is Vedic (original, authoritative) versus what was added 1,500 years later. We treat all three fairly — with primary sources.</p>
+  </div>
+</section>
+
+<!-- ─── ENVIRONMENT ─── -->
+<section id="environment">
+  <div class="container-wide">
+    <h2>
+      <span class="label">Section 01 · What the Instruments Measured</span>
+      Real Environmental Changes During a Solar Eclipse
+    </h2>
+    <p class="container" style="padding:0; margin-bottom:0;">These are not theories. They are measured, published, reproducible findings from multiple independent research teams across decades of eclipse study.</p>
+
+    <div class="env-grid">
+
+      <div class="env-card">
+        <div class="env-card-icon">🌡️</div>
+        <div class="env-card-title">Temperature Drop & Humidity Spike</div>
+        <p>Surface temperatures drop <strong>1°C to 5°C within minutes</strong> in totality zones. The cooling rate is faster than normal nightfall because the moon's shadow travels at supersonic speed (~1,700 km/h). Relative humidity simultaneously spikes as the air cools. These changes stress the body's thermoregulation.</p>
+        <a class="source-link" href="https://royalsocietypublishing.org/doi/10.1098/rsta.2015.0214" target="_blank">↗ Phil. Trans. Royal Society A, 2016 — 44-eclipse synthesis</a>
+      </div>
+
+      <div class="env-card">
+        <div class="env-card-icon">🌀</div>
+        <div class="env-card-title">Atmospheric Gravity Waves</div>
+        <p>The supersonic shadow boundary generates <strong>internal atmospheric gravity waves</strong> that propagate vertically through the troposphere and stratosphere. These waves were confirmed by Lidar measurements at three simultaneous altitudes during the 11 August 1999 eclipse over Bulgaria — they are not hypothetical.</p>
+        <a class="source-link" href="https://acp.copernicus.org/articles/7/4943/2007/" target="_blank">↗ Atmospheric Chemistry & Physics, Kazadzis et al., 2007</a>
+      </div>
+
+      <div class="env-card">
+        <div class="env-card-icon">☁️</div>
+        <div class="env-card-title">Ozone Layer Disruption</div>
+        <p>Gravity waves disturb the stratospheric ozone layer, causing a <strong>measurable reduction in ozone concentration</strong> during totality. The 2006 eclipse study confirmed simultaneous changes in ozone, the mixing layer height, and meteorological parameters. Less ozone means more short-wavelength cosmic radiation reaches the surface.</p>
+        <a class="source-link" href="https://acp.copernicus.org/articles/7/4943/2007/" target="_blank">↗ Kazadzis, Bais, Kouremeti et al., ACP 2007</a>
+      </div>
+
+      <div class="env-card">
+        <div class="env-card-icon">⚡</div>
+        <div class="env-card-title">Ionospheric TEC Depletion</div>
+        <p>Total Electron Content (TEC) in the ionosphere begins declining after first contact and hits its minimum <strong>15–30 minutes after totality</strong> (a lag effect). The stratosphere temporarily reverts to nighttime chemistry. The ELF (Extremely Low Frequency) electromagnetic field at Earth's surface changes — a field known to influence circadian biology.</p>
+        <a class="source-link" href="https://www.sciencedirect.com/science/article/abs/pii/S1364682624001482" target="_blank">↗ J. Atmos. Solar-Terrestrial Physics, 2024</a>
+      </div>
+
+      <div class="env-card">
+        <div class="env-card-icon">🌊</div>
+        <div class="env-card-title">Surface Water pH Change</div>
+        <p>During the 22 July 2009 partial eclipse in India, seawater pH <strong>reduced by ~20% of the pH difference</strong> from normal to seawater levels during a partial eclipse, and ~40% during a total eclipse — indicating increased ionization of surface water from the additional short-wavelength radiation reaching the surface.</p>
+        <a class="source-link" href="https://nopr.niscpr.res.in/handle/123456789/29145" target="_blank">↗ Indian J. Traditional Knowledge, 13(4), 2014</a>
+      </div>
+
+      <div class="env-card">
+        <div class="env-card-icon">🍄</div>
+        <div class="env-card-title">Post-Eclipse Airborne Spore Surge</div>
+        <p>During the 24 October 1995 Indian eclipse, <em>Aspergillus fumigatus</em> and <em>Aspergillus flavus</em> (common food-contaminating fungi) showed a <strong>spike in airborne colony counts in the post-eclipse phase</strong>, linked to temperature and wind velocity changes. This is the period when uncovered food is most at risk — not during the eclipse itself.</p>
+        <a class="source-link" href="https://link.springer.com/article/10.1007/BF02694152" target="_blank">↗ Aerobiologia, Springer, 1997</a>
+      </div>
+
+      <div class="env-card">
+        <div class="env-card-icon">🦠</div>
+        <div class="env-card-title">Bacterial Morphology Changes</div>
+        <p>Clinical isolates of <em>Staphylococcus aureus</em>, <em>Klebsiella</em> sp., <em>E. coli</em>, and <em>Candida albicans</em> showed <strong>significant morphological changes and altered antibiotic sensitivity patterns</strong> when exposed to eclipse sunlight vs. normal sunlight — suggesting the altered radiation environment triggers phenotypic switching in pathogens.</p>
+        <a class="source-link" href="https://pubmed.ncbi.nlm.nih.gov/22010299/" target="_blank">↗ PMC / Journal of Clinical Microbiology, 2011 (Mangalore eclipse, 2010)</a>
+      </div>
+
+      <div class="env-card">
+        <div class="env-card-icon">🐦</div>
+        <div class="env-card-title">Animal Circadian Disruption</div>
+        <p>Across multiple documented eclipses, birds return to roosts, crickets begin chirping, bees return to hives, and cows lie down — <strong>consistent across species and geographies</strong>. This is driven by the temperature drop and light change triggering melatonin release mid-day. In humans, the same hormonal trigger occurs.</p>
+        <a class="source-link" href="https://royalsocietypublishing.org/doi/10.1098/rsta.2015.0214" target="_blank">↗ Phil. Trans. Royal Society A, 2016</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRACTICES ─── -->
+<section id="practices">
+  <div class="container">
+    <h2>
+      <span class="label">Section 02 · Belief by Belief</span>
+      What Each Practice Actually Addresses
+    </h2>
+    <p>Each practice below is tagged with its textual authority level — the most important distinction most people don't know:</p>
+
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin:20px 0 36px;">
+      <span class="auth-badge auth-shruti">● Shruti — Vedas &amp; Upanishads (Most Authoritative)</span>
+      <span class="auth-badge auth-smriti">● Smriti — Manusmriti, Puranas (Secondary)</span>
+      <span class="auth-badge auth-folk">● Folk — No clear textual basis</span>
+    </div>
+
+    <!-- PRACTICE 1 -->
+    <div class="practice">
+      <div class="practice-header">
+        <div class="practice-num">01</div>
+        <div class="practice-meta">
+          <div class="practice-action">Do Not Look at the Eclipse Directly</div>
+          <div class="practice-origin origin-shruti">● Consistent across all traditions · Fully confirmed by physics</div>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="science-block">
+          <div class="science-label">🔬 Mechanism · Solar Retinopathy</div>
+          <p>During a partial or annular eclipse, ambient light drops — causing the <strong>pupil to dilate</strong>. But the sun's UV-A, UV-B, and infrared radiation remain undiminished. The dilated pupil now admits more of this radiation directly onto the retina. The retina has no pain receptors — the damage is silent and permanent. This is <strong>solar retinopathy</strong>. Post-eclipse clinics worldwide consistently record a surge in retinal burns after every partial eclipse.</p>
+        </div>
+        <div class="highlight green">
+          <div class="highlight-title">⚑ Important nuance</div>
+          <p>During <em>totality only</em> (total solar eclipse, exact totality window), it is safe to look without protection. Before and after totality, it is not. This is not a matter of degree — it is a physiological fact. The tradition of not looking was exactly right for exactly the right physical reason, without knowing retinal anatomy.</p>
+        </div>
+      </div>
+      <div class="verdict-bar">
+        <span class="verdict-label">Verdict</span>
+        <span class="verdict-pill verdict-confirmed">100% Confirmed by Physics</span>
+      </div>
+    </div>
+
+    <!-- PRACTICE 2 -->
+    <div class="practice">
+      <div class="practice-header">
+        <div class="practice-num">02</div>
+        <div class="practice-meta">
+          <div class="practice-action">Bathe Before and After the Eclipse</div>
+          <div class="practice-origin origin-shruti">● Shruti-adjacent · Pancavimsa Brahmana, Taittiriya Brahmana (Vedic level)</div>
+        </div>
+      </div>
+      <div class="practice-body">
+        <p>This is the <strong>best-supported eclipse practice scientifically</strong>. The Brahmanas — which carry Shruti-level authority — prescribe ritual bathing at onset and conclusion. Three independent mechanisms support this:</p>
+        <div class="science-block">
+          <div class="science-label">🔬 Mechanism 1 · Post-Eclipse Spore Deposition</div>
+          <p>The 1995 aerobiological study found that <em>Aspergillus fumigatus</em> and <em>Aspergillus flavus</em> airborne colony counts spike in the post-eclipse phase. These spores settle on all exposed surfaces — including skin and hair. A post-eclipse bath physically washes off deposited fungal spores before they can be transferred to mucosal surfaces.</p>
+        </div>
+        <div class="science-block">
+          <div class="science-label">🔬 Mechanism 2 · Thermal Stress Response</div>
+          <p>The sudden temperature drop (1–5°C) and humidity spike during an eclipse represent a measurable physiological stressor. Pre-eclipse bathing (cold water) creates a mild adrenal response — increased alertness, mild immune activation — that is a known physiological preparation for environmental stress.</p>
+        </div>
+        <div class="science-block">
+          <div class="science-label">🔬 Mechanism 3 · Circadian Reset</div>
+          <p>Post-eclipse, the body has experienced an anomalous mid-day darkness that triggered melatonin release. The post-eclipse bath + sunlight re-exposure helps reset the light-dependent suppression of melatonin, preventing the circadian confusion from extending into the evening sleep cycle.</p>
+        </div>
+        <div class="highlight gold">
+          <div class="highlight-title">⚑ On "Ganga water purifies during eclipse"</div>
+          <p>This Puranic elaboration may encode a practical observation: in pre-refrigeration India, stagnant water bodies were more susceptible to the post-eclipse fungal spore deposition than fast-flowing river water. Ganga (flowing water) was genuinely the safer water source for bathing. The spiritual claim is a mythologization of a hygiene observation.</p>
+        </div>
+      </div>
+      <div class="verdict-bar">
+        <span class="verdict-label">Verdict</span>
+        <span class="verdict-pill verdict-strong">Strong Scientific Basis · 3 Independent Mechanisms</span>
+      </div>
+    </div>
+
+    <!-- PRACTICE 3 -->
+    <div class="practice">
+      <div class="practice-header">
+        <div class="practice-num">03</div>
+        <div class="practice-meta">
+          <div class="practice-action">Do Not Eat During the Eclipse (Sutak)</div>
+          <div class="practice-origin origin-smriti">● Smriti — Manusmriti, Skanda Purana, Nirnaya Sindhu · NOT Vedic Shruti</div>
+        </div>
+      </div>
+      <div class="practice-body">
+        <p>This is the most discussed belief and the most misunderstood. The science here has a paradox.</p>
+        <div class="science-block">
+          <div class="science-label">🔬 The Paradox — Enhanced Bacterial Killing, Then Post-Eclipse Surge</div>
+          <p>The 1980 <em>Radiation and Environmental Biophysics</em> study (Feb 16, 1980 total eclipse) found that during the eclipse, <strong>enhanced killing of <em>E. coli</em>, <em>S. typhimurium</em>, <em>S. aureus</em>, and <em>B. subtilis</em></strong> occurred compared to a matched control day — because ozone reduction increases bactericidal short-wavelength cosmic radiation. Bacteria are killed MORE during an eclipse, not less. Yet traditional belief says avoid food because bacteria increase. The inversion happens post-eclipse: the 1995 aerobiological study found fungal spores surge <em>after</em> the eclipse, not during it.</p>
+        </div>
+        <div class="highlight gold">
+          <div class="highlight-title">⚑ What the original wisdom likely was</div>
+          <p>In pre-refrigeration India, food prepared outdoors during an eclipse would face: (a) sudden darkness and cooling during preparation, (b) the post-eclipse airborne spore surge settling on uncovered food. The safest response was not to have food out at all. <strong>Fasting during the eclipse ensured food was not exposed to the post-eclipse contamination window.</strong> The mechanism was inverted when mythologized ("eclipse energy poisons food") but the outcome was correct.</p>
+        </div>
+        <div class="highlight red">
+          <div class="highlight-title">✕ What is NOT supported</div>
+          <p>That food is spiritually contaminated by eclipse energy. That cooked food becomes toxic. That radiation from the eclipse alters the chemical composition of food. None of this has evidence. Modern households with refrigeration face none of the original risk. The Tulsi leaf prescription, however, has partial support: <em>Ocimum sanctum</em> has documented antibacterial properties and was a functional food preservative.</p>
+        </div>
+      </div>
+      <div class="verdict-bar">
+        <span class="verdict-label">Verdict</span>
+        <span class="verdict-pill verdict-partial">Partial — Original logic valid; mechanism was mythologized</span>
+      </div>
+    </div>
+
+    <!-- PRACTICE 4 -->
+    <div class="practice">
+      <div class="practice-header">
+        <div class="practice-num">04</div>
+        <div class="practice-meta">
+          <div class="practice-action">Pregnant Women Stay Indoors &amp; Avoid Sharp Instruments</div>
+          <div class="practice-origin origin-smriti">● Smriti — Puranas, Dharmashastra · Specific prohibitions are not Vedic</div>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="science-block">
+          <div class="science-label">🔬 Supported: Thermal &amp; Endocrine Stress</div>
+          <p>The documented temperature drop of 1–5°C is a genuine physiological stressor. Pregnant women are more vulnerable to thermal stress and sudden environmental changes — their thermoregulatory demands are higher. Additionally, the mid-day melatonin trigger from eclipse darkness is a real endocrine event. Melatonin has documented placental roles — an unexpected mid-day melatonin surge is a genuine, if modest, endocrine disruption for a pregnant woman.</p>
+        </div>
+        <div class="science-block">
+          <div class="science-label">🔬 Supported: Sharp Instruments in Dim Light</div>
+          <p>The prohibition on cutting vegetables or using sharp instruments during an eclipse is straightforwardly a safety rule for dim conditions. In pre-electric India, the sudden darkening of midday without warning made kitchen work genuinely hazardous. This was practical safety, later expanded into a mystical prohibition.</p>
+        </div>
+        <div class="highlight red">
+          <div class="highlight-title">✕ Not supported</div>
+          <p>The claim that looking at an eclipse causes fetal deformity or "marks" the child (harelip, birthmarks) has no physiological mechanism and no evidence. Pediatric associations are clear that eclipses do not cause birth defects. The protective instinct was sound; the specific mechanism was mythological.</p>
+        </div>
+      </div>
+      <div class="verdict-bar">
+        <span class="verdict-label">Verdict</span>
+        <span class="verdict-pill verdict-partial">Partial — Protective instinct valid; specific mechanism not</span>
+      </div>
+    </div>
+
+    <!-- PRACTICE 5 -->
+    <div class="practice">
+      <div class="practice-header">
+        <div class="practice-num">05</div>
+        <div class="practice-meta">
+          <div class="practice-action">Stay Awake, Chant, Do Not Sleep</div>
+          <div class="practice-origin origin-smriti">● Smriti / Dharmashastra — with behavioral psychology basis</div>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="science-block">
+          <div class="science-label">🔬 Mechanism · Mid-Day Melatonin &amp; Circadian Disruption</div>
+          <p>The pineal gland responds to light levels, not clock time. When the sun disappears mid-day, the pineal gland releases <strong>melatonin</strong> — the hormone that initiates the sleep cycle. This creates a measurable circadian disruption. Sleeping during this window means the body cycles through the wrong hormonal sequence for that time of day — cortisol suppressed, melatonin elevated mid-afternoon — potentially disrupting the evening sleep cycle. Prescription for wakefulness during the eclipse has a genuine chronobiological logic.</p>
+        </div>
+        <p>Additionally, keeping people engaged in structured group activity (chanting, ritual) during a total eclipse — which in pre-modern times was terrifying and unexplained — was functionally a <strong>psychological mass-panic prevention measure</strong>. This is public health management through ritual.</p>
+      </div>
+      <div class="verdict-bar">
+        <span class="verdict-label">Verdict</span>
+        <span class="verdict-pill verdict-partial">Weak-Moderate — Chronobiological basis is real; not physically harmful to sleep</span>
+      </div>
+    </div>
+
+    <!-- PRACTICE 6 -->
+    <div class="practice">
+      <div class="practice-header">
+        <div class="practice-num">06</div>
+        <div class="practice-meta">
+          <div class="practice-action">Rahu &amp; Ketu "Swallow" the Sun/Moon</div>
+          <div class="practice-origin origin-folk">● Smriti — Bhagavata Purana, 6th century CE · Created AFTER Aryabhata's mathematics</div>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="highlight red">
+          <div class="highlight-title">⚑ The Timeline Problem</div>
+          <p>Aryabhata (476–550 CE) mathematically formalized the concept of <strong>lunar nodes</strong> — the two points where the moon's orbit intersects the ecliptic, which are the actual cause of eclipses. These mathematical points were renamed Rahu (ascending node) and Ketu (descending node) — and the Puranic demon mythology was retrofitted onto them. This means the Rahu-Ketu <em>story</em> as an eclipse explanation is no older than the 6th century CE. The Rigveda's eclipse passages (4000+ BCE) call the eclipse demon <em>Svarbhanu</em> — not Rahu. Rahu is not in the Rigveda, Samaveda, or Yajurveda.</p>
+        </div>
+        <p>Rahu and Ketu are real astronomical entities: the ascending and descending lunar nodes. They do cause eclipses — but as mathematical intersection points, not as divine beings. The Vedic rishis observed the eclipse accurately. The demonic explanation was the best available explanatory metaphor for an event that was physically inexplicable. The Puranas personified what Aryabhata later formalized. Neither the observational poetry (Vedic) nor the mathematical precision (Aryabhata) is served by treating the 6th-century Puranic myth as the original teaching.</p>
+      </div>
+      <div class="verdict-bar">
+        <span class="verdict-label">Verdict</span>
+        <span class="verdict-pill verdict-none">No literal scientific basis · Beautiful observational mythology</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── TEXTUAL AUTHORITY ─── -->
+<section id="texts">
+  <div class="container">
+    <h2>
+      <span class="label">Section 03 · Textual Archaeology</span>
+      Where Do These Beliefs Actually Come From?
+    </h2>
+    <p>The single most important distinction almost nobody knows: <strong>the Vedic observation of eclipses is 6,000+ years old and scientifically sophisticated. The Rahu-Ketu mythology is from the 6th century CE</strong> — added after Aryabhata's mathematics. They are separated by 4,500 years.</p>
+
+    <table class="auth-table">
+      <thead>
+        <tr>
+          <th>Belief / Prescription</th>
+          <th>Text</th>
+          <th>Authority Level</th>
+          <th>Approx. Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Eclipse as real observable astronomical event</td>
+          <td>Rigveda 5.40.5–9 (Svarbhanu passage)</td>
+          <td><span class="auth-badge auth-shruti" style="margin:0;padding:3px 10px;font-size:9px;">Shruti — Highest</span></td>
+          <td>4000+ BCE (dated by Vahia &amp; Soma, 2023)</td>
+        </tr>
+        <tr>
+          <td>Four-phase eclipse structure; ritual response to eclipse</td>
+          <td>Pancavimsa Brahmana, Taittiriya Brahmana</td>
+          <td><span class="auth-badge auth-shruti" style="margin:0;padding:3px 10px;font-size:9px;">Shruti — Highest</span></td>
+          <td>c. 900–700 BCE</td>
+        </tr>
+        <tr>
+          <td>Bathing, tarpana, mantra at eclipse onset &amp; end</td>
+          <td>Brahmana texts (Shruti-level)</td>
+          <td><span class="auth-badge auth-shruti" style="margin:0;padding:3px 10px;font-size:9px;">Shruti — Highest</span></td>
+          <td>c. 900–700 BCE</td>
+        </tr>
+        <tr>
+          <td>Sutak timings, food restrictions, donation rules</td>
+          <td>Manusmriti, Nirnaya Sindhu, Grahalaghava</td>
+          <td><span class="auth-badge auth-smriti" style="margin:0;padding:3px 10px;font-size:9px;">Smriti — Secondary</span></td>
+          <td>c. 200 BCE – 1500 CE</td>
+        </tr>
+        <tr>
+          <td>Rahu &amp; Ketu as eclipse-causing demon entities</td>
+          <td>Bhagavata Purana Canto 8, Vishnu Purana</td>
+          <td><span class="auth-badge auth-smriti" style="margin:0;padding:3px 10px;font-size:9px;">Smriti — Secondary</span></td>
+          <td>6th century CE+ (post-Aryabhata)</td>
+        </tr>
+        <tr>
+          <td>Fetal deformity from eclipse viewing; food becomes toxic</td>
+          <td>Oral / Folk tradition; no clear Shruti basis</td>
+          <td><span class="auth-badge auth-folk" style="margin:0;padding:3px 10px;font-size:9px;">Folk — No textual authority</span></td>
+          <td>Medieval to modern</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight gold" style="margin-top:32px;">
+      <div class="highlight-title">⚑ The Rigveda's Eclipse — Oldest Confirmed Record in Human History</div>
+      <p>A 2023 study in the <em>Journal of Astronomical History and Heritage</em> by Dr. Mayank Vahia (TIFR Mumbai) and Dr. Mitsuru Soma (NAOJ Japan) confirmed that Rigveda 5.40.5–9 describes a real, datable total solar eclipse — either <strong>22 October 4202 BCE or 19 October 3811 BCE</strong>. This is the oldest confirmed eclipse record in human history, predating the Syrian clay tablet of 1375 BCE and the Irish Loughcrew rock carving of 3340 BCE. The Vedic rishis were observing eclipses precisely 6,000 years ago. The Rahu myth was added 4,500 years later.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section id="faq">
+  <div class="container">
+    <h2>
+      <span class="label">Section 04 · Common Questions</span>
+      FAQ
+    </h2>
+    <p style="margin-bottom:36px;">Answering the questions from all three audiences — skeptics, believers, and those who just want the facts.</p>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        "Science says nothing special happens during an eclipse — it's just a shadow." Is this true?
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-a">
+        <p><strong>No, this is factually incorrect.</strong> A 2016 Royal Society review synthesizing data from 44 eclipses documented measurable changes in temperature, pressure, humidity, wind patterns, ozone levels, ionospheric electron density, and atmospheric gravity waves. Bacterial morphology changes have been documented (2011 PMC study, Mangalore). Post-eclipse airborne fungal spore counts surge (1997 Aerobiologia). These are peer-reviewed findings, not claims. What is correct to say is that the eclipse does not create supernatural danger — but the atmospheric event is physically and biologically real.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Do bacteria really multiply in food during an eclipse?
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-a">
+        <p>This is a <strong>partial inversion of what actually happens.</strong> The 1980 Radiation and Environmental Biophysics study found that during the eclipse, enhanced <em>killing</em> of common pathogenic bacteria occurred — because ozone reduction allows more bactericidal short-wavelength radiation to reach the surface. During the eclipse, bacteria are killed more efficiently, not less. However, the post-eclipse period sees a documented spike in airborne <em>Aspergillus</em> fungal spores (1997 aerobiological study). Food left uncovered during and after the eclipse faces greater fungal contamination risk in the post-eclipse window — not from "eclipse energy" but from documented spore dispersal patterns. The traditional wisdom to keep food covered was correct; the mechanism stated was incorrect.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Is Rahu-Ketu mythology from the Vedas?
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-a">
+        <p><strong>No.</strong> Rahu is not mentioned in the Rigveda, Samaveda, or Yajurveda. The Rigveda calls the eclipse entity <em>Svarbhanu</em>. The elaborate Rahu-Ketu mythology — the Samudra Manthan story, the demon being beheaded, the severed head swallowing the sun — appears in the Bhagavata Purana and Vishnu Purana, which are Smriti texts from the 6th century CE and later. Critically, Rahu and Ketu as the ascending and descending lunar nodes were mathematically formalized by <strong>Aryabhata in 499 CE</strong>. The Puranic mythology was then built around his mathematical concepts almost immediately afterward. The Vedic eclipse observation is 6,000 years old. The Rahu-Ketu story is 1,500 years old. They are not the same tradition.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Is it dangerous for pregnant women to be outside during an eclipse?
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-a">
+        <p><strong>The eclipse itself does not cause fetal deformity — pediatric associations globally are clear on this.</strong> However, the protective instinct has a defensible basis: the documented temperature drop of 1–5°C is a real thermal stressor, and pregnant women have higher thermoregulatory demands. The mid-day melatonin spike triggered by eclipse darkness is a real endocrine event (melatonin has placental roles). These are modest stressors — not emergencies — but they are real. The Dharmashastra-level prescriptions to stay indoors reflect a reasonable precautionary approach to environmental disruption. The claim that viewing an eclipse "marks" the child is not supported by evidence.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        If I follow these practices today with modern refrigeration and electric lighting, do they still apply?
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-a">
+        <p>Selectively. <strong>Don't look at the eclipse without protection</strong> — this applies to everyone, always, regardless of beliefs. It is pure physics. <strong>Bathing before and after</strong> remains reasonable given post-eclipse spore deposition, though modern shower filtration reduces the risk significantly. <strong>Fasting</strong> is no longer necessary for food safety reasons (refrigeration solves the original problem), but causes no harm. <strong>Rahu mythology</strong> — there is no physical eclipse mechanism here; it is cultural and spiritual. <strong>Sharp instruments / pregnant women indoors</strong> — without pre-electric darkness conditions, the practical safety rationale is diminished; the practice remains harmless.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        "These are just superstitions invented by priests to control people." Is this fair?
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-a">
+        <p>This framing is historically reductive and inaccurate for the core Vedic layer. The Rigvedic eclipse record (4000+ BCE) has been confirmed as the oldest precise astronomical observation in human history by TIFR and NAOJ researchers in 2023. The Vedic rishis were doing astronomy, not fabricating fear. The bathing prescriptions in the Brahmanas have three independently verifiable physiological rationales. The instruction not to look at the eclipse is exact physics. <strong>Where the "control" critique has merit</strong> is in the Puranic and Smriti elaborations — particularly the elaborate Sutak timing rules, the Rahu mythology, and the donation prescriptions — which represent a later institutional layer built over the original observational core. Dismissing the entire tradition due to its later elaborations means discarding a 6,000-year observational record that modern instruments have validated.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What is the difference between Shruti and Smriti? Why does it matter?
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-a">
+        <p><strong>Shruti</strong> ("that which was heard") — the four Vedas and their Upanishads. Considered primordial revelation, not human composition. The Brahmanas (ritual commentaries) and Aranyakas also carry Shruti status. These are the most authoritative texts. <strong>Smriti</strong> ("that which was remembered") — human-authored elaborations: Manusmriti, the 18 Puranas, Dharmashastra texts, Itihasas. They are authoritative but explicitly subordinate to Shruti. <strong>Why it matters for eclipse beliefs:</strong> The food fasting rules, Rahu mythology, and elaborate Sutak timings are Smriti. The bathing prescriptions and four-phase eclipse structure are Shruti-level (Brahmanas). When a Smriti text contradicts or elaborates beyond Shruti, the Smriti elaboration does not carry equal weight within the tradition's own hierarchy. Most people who follow eclipse practices don't know that the most popular eclipse rules come from the weakest textual authority level.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FINAL NOTE ─── -->
+<section style="border-bottom:none;">
+  <div class="container">
+    <div class="final-note">
+      <h3>The Actual Story</h3>
+      <p>The Vedic rishis, 6,000 years ago, observed a solar eclipse with enough precision that modern astronomers could date it. They encoded the observation in metaphorical language — Svarbhanu piercing the sun — because that was the available explanatory framework. The core observation was rigorous. Over 4,500 subsequent years, layers of mythology, ritual elaboration, institutional prescription, and folk belief accumulated over that original observation. The bathing prescriptions and the warning against looking at the eclipse survived intact and are scientifically defensible. The Rahu mythology and food-poisoning claims do not have the same basis.</p>
+      <p style="margin-top:16px;">The eclipse is a real atmospheric event. Some Indian practices address that reality accurately. Knowing which ones — and why — lets you follow tradition with understanding, not fear.</p>
+    </div>
+
+    <div style="margin-top:40px; padding: 24px; background: var(--bg2); border-radius:10px; border: 1px solid var(--border);">
+      <div class="science-label" style="margin-bottom:12px; color: var(--gold-dim);">Primary Sources Referenced</div>
+      <p style="font-family: var(--mono); font-size: 12px; color: var(--grey); line-height: 1.9; margin:0;">
+        Vahia &amp; Soma (2023) — <em>J. Astronomical History &amp; Heritage</em> · Kazadzis, Bais et al. (2007) — <em>Atmospheric Chemistry &amp; Physics</em> · Antonia et al. (1979), Fernandez et al. (1993, 1996) — atmospheric turbulence during eclipses · Behari, Bhattacharya et al. (1980) — <em>Radiation and Environmental Biophysics</em> (Springer) · Tothill et al. (1995) — <em>Aerobiologia</em> (Springer) · IJKM eclipse study (2011) — <em>PMC / PubMed Central</em> · Indian J. Traditional Knowledge 13(4) (2014) — water pH during 2009 eclipse · J. Atmospheric and Solar-Terrestrial Physics (2024) — ionospheric TEC across 3 eclipses · Phil. Trans. Royal Society A (2016) — 44-eclipse synthesis
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// Intersection Observer for fade-in
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.practice, .env-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
